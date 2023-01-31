@@ -35,6 +35,7 @@ class History
                 );
             }
         } catch (TypeError|Throwable $e) {
+            //set empty array if something wrong
             $this->messages = array();
         }
     }
