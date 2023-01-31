@@ -2,8 +2,8 @@
 ini_set('display_errors', 1);
 require '../util/initialize.php';
 require '../util/model/History.php';
-require 'services/get_history_by_id.php';
-require 'services/create_new_history.php';
+require 'service/get_history_by_id.php';
+require 'service/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
     $uid = extract_path_param();
@@ -15,7 +15,7 @@ proceed("GET", function (mysqli $db) {
         exit();
     }
 
-    $arr = get_history_by_id($db, $id);
+    $arr = get_history_by_id($db, $id); //TODO: add uid into argument
     count($arr) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
     echo json_encode($arr);
 });
