@@ -31,3 +31,13 @@ function proceed(string $method, callable $yes): void
         http_response_code(HTTP_METHOD_NOT_ALLOWED);
     }
 }
+
+function extract_path_param(): string
+{
+    $userid = "";
+    $pattern = '/history\.php\/([^\/]+)/';
+    if (preg_match($pattern, $_SERVER['REQUEST_URI'], $matches)) {
+        $userid = $matches[1];
+    }
+    return $userid;
+}

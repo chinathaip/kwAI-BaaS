@@ -6,6 +6,8 @@ require 'services/get_history_by_id.php';
 require 'services/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
+    $uid = extract_path_param();
+    echo $uid;
     $id = $_GET['id'] ?? "";
 
     if ($id == "") {
