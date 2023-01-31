@@ -7,17 +7,15 @@ require 'service/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
     $uid = extract_path_param();
-    echo $uid;
     $id = $_GET['id'] ?? "";
-
     if ($id == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
     }
 
-    $arr = get_history_by_id($db, $id); //TODO: add uid into argument
-    count($arr) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
-    echo json_encode($arr);
+    $result = get_history_by_id($db, $id); //TODO: add uid into argument
+    count($result) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
+    echo json_encode($result);
 });
 
 proceed("POST", function (mysqli $db) {
