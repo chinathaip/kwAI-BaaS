@@ -26,6 +26,7 @@ function proceed(string $method, callable $yes): void
         $db = connectDB();
         $yes($db);
         $db->close();
+        exit();
     } else {
         http_response_code(HTTP_METHOD_NOT_ALLOWED);
     }

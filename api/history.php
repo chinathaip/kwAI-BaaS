@@ -1,6 +1,9 @@
 <?php
 ini_set('display_errors', 1);
 require '../util/initialize.php';
+require '../util/model/History.php';
+require 'services/get_history_by_id.php';
+require 'services/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
     $id = $_GET['id'] ?? "";
@@ -10,39 +13,21 @@ proceed("GET", function (mysqli $db) {
         exit();
     }
 
-    $result = $db->query("select id, user_question, ai_response from messages where messages.history_id = " . $id);
-    $arr = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-        $arr[] = $row;
-    }
-
+    $arr = get_history_by_id($db, $id);
     count($arr) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
     echo json_encode($arr);
 });
 
 proceed("POST", function (mysqli $db) {
-    http_response_code(HTTP_OK);
+    //read request body & put into History object
     $data = json_decode(file_get_contents('php://input'), true);
-    echo "history id: " . $data['history_id'];
-    echo "user id: " . $data['user_id'];
-    foreach ($data['messages'] as $message) {
-        echo "question: ". $message['user_question'];
-        echo "answer: ". $message['ai_response'];
+    $history = new History($data['history_id'], $data['user_id'], $data['messages']);
+    if (!$history->is_valid()) {
+        http_response_code(HTTP_BAD_REQUEST);
+        exit();
     }
-//    $history = new history($data['id'], $data['user_question'], $data['ai_response']);
-//    echo $history->id;
-//    echo $history->user_question;
-//    echo $history->ai_response;
 
-//    if ($id == "" || $user_question == "" || $ai_response == "") {
-//        http_response_code(HTTP_BAD_REQUEST);
-//        exit();
-//    }
-//
-//    $stmt = $db->prepare("insert into messages (user_question, ai_response, history_id) values (?, ?, ?)");
-//    $stmt->bind_param("iss", $id, $user_question, $ai_response);
-//    $stmt->execute();
-//    $stmt->close();
-//
-//    http_response_code(HTTP_CREATED);
+    $result = create_new_history($db, $history);
+    http_response_code(HTTP_CREATED);
+    echo json_encode($result);
 });
