@@ -5,7 +5,7 @@ function get_user_history_by_id(mysqli $db, string $userid, string $hid): array
         return array("not owner");
     }
 
-    $result = $db->query("select id, user_question, ai_response from messages where history_id = " . $hid);
+    $result = $db->query("select * from messages where history_id = " . $hid);
     $arr = array();
     while ($row = mysqli_fetch_assoc($result)) {
         $arr[] = $row;
@@ -16,13 +16,13 @@ function get_user_history_by_id(mysqli $db, string $userid, string $hid): array
 function is_history_owner(mysqli $db, string $uid, string $hid): bool
 {
     $result = $db->query("select id from history where user_id = " . $uid);
-    $arr = array();
+    $rows = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $arr[] = $row;
+        $rows[] = $row['id'];
     }
     //check if history_id is in the array
-    foreach ($arr as $row) {
-        if ($row['id'] == $hid) {
+    foreach ($rows as $id) {
+        if ($id == $hid) {
             return true;
         }
     }

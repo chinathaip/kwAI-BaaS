@@ -4,12 +4,21 @@ require '../util/initialize.php';
 require '../util/model/History.php';
 require 'service/get_user_history_by_id.php';
 require 'service/create_new_history.php';
+require 'service/get_all_user_history.php';
 
 proceed("GET", function (mysqli $db) {
     $userid = $_GET['userid'] ?? "";
     $hid = $_GET['hid'] ?? "";
-    if ($hid == "" || $userid == "") {
+    if ($userid == "") {
         http_response_code(HTTP_BAD_REQUEST);
+        exit();
+    }
+
+    //doesn't specify history id --> get all
+    if ($hid == "") {
+        $result = get_all_user_history($db, $userid);
+        count($result) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
+        echo json_encode($result);
         exit();
     }
 
