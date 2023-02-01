@@ -1,6 +1,10 @@
 <?php
 function get_user_history_by_id(mysqli $db, string $userid, string $hid): array
 {
+    if (!is_history_id_exist($db, $hid)) {
+        return array("history not exist");
+    }
+
     if (!is_history_owner($db, $userid, $hid)) {
         return array("not owner");
     }
