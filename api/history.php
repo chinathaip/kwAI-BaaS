@@ -6,16 +6,26 @@ require 'service/get_history_by_id.php';
 require 'service/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
-    $uid = extract_path_param();
-    $id = $_GET['id'] ?? "";
-    if ($id == "") {
+    $userid = $_GET['userid'] ?? "";
+    $hid = $_GET['hid'] ?? "";
+    if ($hid == "" || $userid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
     }
 
-    $result = get_history_by_id($db, $id); //TODO: add uid into argument
-    count($result) > 0 ? http_response_code(HTTP_OK) : http_response_code(HTTP_NOT_FOUND);
-    echo json_encode($result);
+    $result = get_history_by_id($db, $userid, $hid); //TODO: add uid into argument
+    switch ($result) {
+        case count($result) == 0:
+            http_response_code(HTTP_NOT_FOUND);
+            exit();
+        case in_array("not owner", $result):
+            http_response_code(HTTP_FORBIDDEN);
+            exit();
+        default:
+            http_response_code(HTTP_OK);
+            echo json_encode($result);
+            exit();
+    }
 });
 
 proceed("POST", function (mysqli $db) {
