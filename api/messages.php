@@ -6,9 +6,9 @@ require '../util/model/Message.php';
 
 handle("POST", function (mysqli $db) {
     //read request body & put into History object
-    $uid = $_GET['userid'] ?? "";
-    $hid = $_GET['hid'] ?? "";
     $data = json_decode(file_get_contents('php://input'), true);
+    $uid = $data['user_id'] ?? "";
+    $hid = $data['history_id'] ?? "";
     $message = new Message($hid, $data['user_question'], $data['ai_response']);
     if (!$message->is_valid()) {
         http_response_code(HTTP_BAD_REQUEST);
@@ -19,7 +19,7 @@ handle("POST", function (mysqli $db) {
         case $result->history_id == "history not exist":
             http_response_code(HTTP_NOT_FOUND);
             exit();
-        case $result->history_idgs == "not owner":
+        case $result->history_id == "not owner":
             http_response_code(HTTP_FORBIDDEN);
             exit();
         default:

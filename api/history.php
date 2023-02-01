@@ -52,8 +52,9 @@ handle("POST", function (mysqli $db) {
 });
 
 handle("DELETE", function (mysqli $db) {
-    $userid = $_GET['userid'] ?? "";
-    $hid = $_GET['hid'] ?? "";
+    $data = json_decode(file_get_contents('php://input'), true);
+    $userid = $data['user_id'] ?? "";
+    $hid = $data['history_id'] ?? "";
     if ($userid == "" || $hid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
