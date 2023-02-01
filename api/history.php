@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 require '../util/initialize.php';
 require '../util/model/History.php';
-require 'service/get_history_by_id.php';
+require 'service/get_user_history_by_id.php';
 require 'service/create_new_history.php';
 
 proceed("GET", function (mysqli $db) {
@@ -13,7 +13,7 @@ proceed("GET", function (mysqli $db) {
         exit();
     }
 
-    $result = get_history_by_id($db, $userid, $hid); //TODO: add uid into argument
+    $result = get_user_history_by_id($db, $userid, $hid); //TODO: add uid into argument
     switch ($result) {
         case count($result) == 0:
             http_response_code(HTTP_NOT_FOUND);
@@ -24,7 +24,6 @@ proceed("GET", function (mysqli $db) {
         default:
             http_response_code(HTTP_OK);
             echo json_encode($result);
-            exit();
     }
 });
 
