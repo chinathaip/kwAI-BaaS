@@ -19,12 +19,12 @@ function connectDB(): mysqli
     return $conn;
 }
 
-function handle(string $method, callable $yes): void
+function handle(string $method, callable $callback): void
 {
     if ($_SERVER['REQUEST_METHOD'] == $method) {
         header("Content-Type: application/json");
         $db = connectDB();
-        $yes($db);
+        $callback($db);
         $db->close();
         exit();
     } else {

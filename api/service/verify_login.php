@@ -1,15 +1,10 @@
 <?php
 
-function verify_login(mysqli $db, string $username, string $password): array
+function get_credentials(mysqli $db, string $username): array
 {
-    $stmt = $db->prepare("select * from users where username = ? and password = ?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $arr = array();
-    while($row = $result->fetch_assoc()) {
-        $arr[] = $row;
+    $result = $db->query("select * from users where username = '" . $username . "'");
+    if($row = mysqli_fetch_assoc($result)) {
+        return $row;
     }
-    return $arr;
+    return array();
 }
