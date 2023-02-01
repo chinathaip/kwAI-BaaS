@@ -5,6 +5,7 @@ require '../util/model/History.php';
 require 'service/get_user_history_by_id.php';
 require 'service/create_new_history.php';
 require 'service/get_all_user_history.php';
+require 'service/delete_history.php';
 
 proceed("GET", function (mysqli $db) {
     $userid = $_GET['userid'] ?? "";
@@ -48,4 +49,17 @@ proceed("POST", function (mysqli $db) {
     $result = create_new_history($db, $history);
     http_response_code(HTTP_CREATED);
     echo json_encode($result);
+});
+
+proceed("DELETE", function (mysqli $db) {
+    $userid = $_GET['userid'] ?? "";
+    $hid = $_GET['hid'] ?? "";
+    if ($userid == "" || $hid == "") {
+        http_response_code(HTTP_BAD_REQUEST);
+        exit();
+    }
+
+    $isDeleted = delete_history($db, $userid, $hid);
+    $isDeleted ? http_response_code(HTTP_OK) : http_response_code(HTTP_FORBIDDEN);
+    echo json_encode(["status" => $isDeleted ? "deleted" : "error"]);
 });
