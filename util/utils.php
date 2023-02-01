@@ -19,7 +19,7 @@ function connectDB(): mysqli
     return $conn;
 }
 
-function proceed(string $method, callable $yes): void
+function handle(string $method, callable $yes): void
 {
     if ($_SERVER['REQUEST_METHOD'] == $method) {
         header("Content-Type: application/json");
@@ -32,12 +32,29 @@ function proceed(string $method, callable $yes): void
     }
 }
 
-function extract_path_param(): string
+
+function is_history_id_exist(mysqli $db, string $hid): bool
 {
-    $userid = "";
-    $pattern = '/history\.php\/([^\/]+)/';
-    if (preg_match($pattern, $_SERVER['REQUEST_URI'], $matches)) {
-        $userid = $matches[1];
+    $result = $db->query("select id from history where history.id = " . $hid);
+    $row = mysqli_fetch_assoc($result);
+    if ($row == null) {
+        return false;
     }
-    return $userid;
+    return $row['id'] == (int)$hid;
+}
+
+function is_history_owner(mysqli $db, string $uid, string $hid): bool
+{
+    $result = $db->query("select id from history where user_id = " . $uid);
+    $rows = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row['id'];
+    }
+    //check if history_id is in the array
+    foreach ($rows as $id) {
+        if ($id == $hid) {
+            return true;
+        }
+    }
+    return false;
 }
