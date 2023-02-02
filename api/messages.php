@@ -10,11 +10,13 @@ handle("POST", function (mysqli $db) {
     $data = json_decode(file_get_contents('php://input'), true);
     $uid = $data['user_id'] ?? "";
     $hid = $data['history_id'] ?? "";
-    $message = new Message($hid, $data['user_question'], $data['ai_response']);
-    if (!$message->is_valid()) {
+    $uq = $data['user_queue'] ?? "";
+    $ai = $data['ai_response'] ?? "";
+    if ($uid == "" || $hid == "" || $uq == "" || $ai == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
     }
+    $message = new Message($hid, $uq, $ai);
 
     switch ($result = send_messages($db, $message, $uid)) {
         case $result->history_id == "history not exist":

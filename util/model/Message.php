@@ -13,9 +13,4 @@ class Message
         $this->user_question = $user_question;
         $this->ai_response = $ai_response;
     }
-
-    function is_valid(): bool
-    {
-        return $this->history_id != "" && $this->user_question != "" && $this->ai_response != "";
-    }
 }
