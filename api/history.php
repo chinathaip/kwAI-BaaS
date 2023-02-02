@@ -37,11 +37,12 @@ handle("GET", function (mysqli $db) {
 handle("POST", function (mysqli $db) {
     //read request body & put into History object
     $data = json_decode(file_get_contents('php://input'), true);
-    $history = new History($data['user_id']);
-    if (!$history->is_valid()) {
+    $uid = $data['user_id'] ?? "";
+    if ($uid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
     }
+    $history = new History($data['user_id']);
 
     $result = create_new_history($db, $history);
     http_response_code(HTTP_CREATED);
