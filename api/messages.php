@@ -10,7 +10,7 @@ handle("POST", function (mysqli $db) {
     $data = json_decode(file_get_contents('php://input'), true);
     $uid = $data['user_id'] ?? "";
     $hid = $data['history_id'] ?? "";
-    $uq = $data['user_queue'] ?? "";
+    $uq = $data['user_question'] ?? "";
     $ai = $data['ai_response'] ?? "";
     if ($uid == "" || $hid == "" || $uq == "" || $ai == "") {
         http_response_code(HTTP_BAD_REQUEST);
