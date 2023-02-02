@@ -1,8 +1,9 @@
 <?php
 ini_set('display_errors', 1);
-require '../util/initialize.php';
-require 'service/send_message.php';
-require '../util/model/Message.php';
+require dirname(__FILE__) . "/.." . "/util/initialize.php";
+require_once BASE_DIR . '/util/model/History.php';
+require_once BASE_DIR . '/util/model/Message.php';
+require_once 'service/send_message.php';
 
 handle("POST", function (mysqli $db) {
     //read request body & put into History object

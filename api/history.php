@@ -1,11 +1,11 @@
 <?php
 ini_set('display_errors', 1);
 require dirname(__FILE__) . "/.." . "/util/initialize.php";
-require BASE_DIR . '/util/model/History.php';
-require 'service/get_user_history_by_id.php';
-require 'service/create_new_history.php';
-require 'service/delete_history.php';
-require 'service/get_all_history.php';
+require_once BASE_DIR . '/util/model/History.php';
+require_once 'service/get_user_history_by_id.php';
+require_once 'service/create_new_history.php';
+require_once 'service/delete_history.php';
+require_once 'service/get_all_history.php';
 handle("GET", function (mysqli $db) {
     $userid = $_GET['userid'] ?? "";
     $hid = $_GET['hid'] ?? "";
