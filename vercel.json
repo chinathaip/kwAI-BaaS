@@ -2,6 +2,15 @@
   "functions": {
     "api/*.php": {
       "runtime": "vercel-php@0.5.2"
+    },
+    "api/service/*.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "util/*.php": {
+      "runtime": "vercel-php@0.5.2"
+    },
+    "util/model/*.php": {
+      "runtime": "vercel-php@0.5.2"
     }
   }
 }
