@@ -4,6 +4,28 @@ require dirname(__FILE__) . "/.." . "/util/initialize.php";
 require_once BASE_DIR . '/util/model/History.php';
 require_once BASE_DIR . '/util/model/Message.php';
 require_once 'service/send_message.php';
+require_once 'service/get_user_history_by_id.php';
+
+handle("GET", function (mysqli $db) {
+    $userid = $_GET['userid'] ?? "";
+    $hid = $_GET['hid'] ?? "";
+    if ($userid == "" || $hid == "") {
+        http_response_code(HTTP_BAD_REQUEST);
+        exit();
+    }
+
+    switch ($result = get_user_history_by_id($db, $userid, $hid)) {
+        case in_array("history not exist", $result):
+            http_response_code(HTTP_NOT_FOUND);
+            exit();
+        case in_array("not owner", $result):
+            http_response_code(HTTP_FORBIDDEN);
+            exit();
+        default:
+            http_response_code(HTTP_OK);
+            echo json_encode($result);
+    }
+});
 
 handle("POST", function (mysqli $db) {
     //read request body & put into History object

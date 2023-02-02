@@ -2,40 +2,23 @@
 ini_set('display_errors', 1);
 require dirname(__FILE__) . "/.." . "/util/initialize.php";
 require_once BASE_DIR . '/util/model/History.php';
-require_once 'service/get_user_history_by_id.php';
 require_once 'service/create_new_history.php';
 require_once 'service/delete_history.php';
 require_once 'service/get_all_history.php';
 handle("GET", function (mysqli $db) {
     $userid = $_GET['userid'] ?? "";
-    $hid = $_GET['hid'] ?? "";
     if ($userid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
     }
 
-    if ($hid == "") {
-        $result = get_all_history($db, $userid);
-        if (count($result) == 0) {
-            http_response_code(HTTP_NOT_FOUND);
-            exit();
-        }
-        http_response_code(HTTP_OK);
-        echo json_encode($result);
+    $result = get_all_history($db, $userid);
+    if (count($result) == 0) {
+        http_response_code(HTTP_NOT_FOUND);
         exit();
     }
-
-    switch ($result = get_user_history_by_id($db, $userid, $hid)) {
-        case in_array("history not exist", $result):
-            http_response_code(HTTP_NOT_FOUND);
-            exit();
-        case in_array("not owner", $result):
-            http_response_code(HTTP_FORBIDDEN);
-            exit();
-        default:
-            http_response_code(HTTP_OK);
-            echo json_encode($result);
-    }
+    http_response_code(HTTP_OK);
+    echo json_encode($result);
 });
 
 handle("POST", function (mysqli $db) {
