@@ -16,6 +16,10 @@ handle("GET", function (mysqli $db) {
 
     if ($hid == "") {
         $result = get_all_history($db, $userid);
+        if (count($result) == 0) {
+            http_response_code(HTTP_NOT_FOUND);
+            exit();
+        }
         http_response_code(HTTP_OK);
         echo json_encode($result);
         exit();
