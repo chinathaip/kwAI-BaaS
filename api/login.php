@@ -1,5 +1,5 @@
 <?php
-require '../util/initialize.php';
+require dirname(__FILE__) . "/.." . "/util/initialize.php";
 require 'service/verify_login.php';
 ini_set('display_errors', 1);
 
