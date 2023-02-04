@@ -1,7 +1,7 @@
 <?php
+ini_set('display_errors', 1);
 require dirname(__FILE__) . "/.." . "/util/initialize.php";
 require 'service/verify_login.php';
-ini_set('display_errors', 1);
 
 handle("POST", function (mysqli $db) {
     $data = json_decode(file_get_contents('php://input'), true);

@@ -5,6 +5,7 @@ require_once BASE_DIR . '/util/model/History.php';
 require_once 'service/create_new_history.php';
 require_once 'service/delete_history.php';
 require_once 'service/get_all_history.php';
+
 handle("GET", function (mysqli $db) {
     $userid = $_GET['userid'] ?? "";
     if ($userid == "") {
