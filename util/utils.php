@@ -7,7 +7,11 @@ function url_for($script_path): string
     }
     return WWW_ROOT . $script_path;
 }
-
+function redirect_to(string $location): void
+{
+    header("Location: " . $location);
+    exit;
+}
 function connectDB(): mysqli
 {
     $conn = new mysqli("containers-us-west-187.railway.app", "root", "kuClq9pNEbhqXbFTP2CG", "railway", "6502");

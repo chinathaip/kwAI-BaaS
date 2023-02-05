@@ -4,6 +4,8 @@ $page_title = "Manage Users";
 include 'header.php';
 require BASE_DIR . "/api/service/get_all_users.php";
 require BASE_DIR . "/util/model/User.php";
+
+//caching with redis?
 $users = get_all_users(connectDB());
 ?>
 
@@ -21,7 +23,6 @@ $users = get_all_users(connectDB());
                 <th>Password</th>
                 <th></th>
                 <th></th>
-                <th></th>
             </tr>
 
             <?php foreach ($users as $user) { ?>
@@ -30,7 +31,6 @@ $users = get_all_users(connectDB());
                     <td><?php echo $user->username ?></td>
                     <td><?php echo $user->password ?></td>
                     <td><a class="action" href='<?php echo "history.php?id=" . $user->id?>'>View History</a></td>
-                    <td><a class=" action" href=''>Edit</a></td>
                     <td><a class="action" href=''>Delete</a></td>
                 </tr>
             <?php } ?>

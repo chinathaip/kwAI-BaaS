@@ -15,3 +15,8 @@ ini_set('display_errors', 1);
 <header>
     <h1>Chat KwAI Admin Panel</h1>
 </header>
+<nav>
+    <ul>
+        <li><a href="index.php">Back to Main Menu</a></li>
+    </ul>
+</nav>
