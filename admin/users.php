@@ -13,6 +13,7 @@ $users = get_all_users(connectDB());
     <div class="pages listing">
         <h1>Manage Users</h1>
         <div class="actions">
+<!--            TODO: direct to create new user page, and interact with db-->
             <a class="action" href="<?php echo url_for("") ?>">Create New User</a>
         </div>
 

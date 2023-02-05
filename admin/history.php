@@ -6,7 +6,7 @@ require BASE_DIR . "/api/service/get_all_history.php";
 
 $id = $_GET["id"] ?? '';
 if ($id == '') {
-    redirect_to(url_for("admin/users.php"));
+    redirect_to("users.php");
 }
 
 //caching with redis?
@@ -34,7 +34,9 @@ $histories = get_all_history(connectDB(), $id);
                     <td><?php echo $history['id'] ?></td>
                     <td><?php echo $history['name'] ?></td>
                     <td><?php echo $history['user_id'] ?></td>
-                    <td><a class="action" href=''>View Chat</a></td>
+                    <td><a class="action"
+                           href='<?php echo "chat.php/?uid=" . $history['user_id'] . "&hid=" . $history['id'] ?>'>View
+                            Chat</a></td>
                     <td><a class="action" href=''>Delete</a></td>
                 </tr>
             <?php } ?>
