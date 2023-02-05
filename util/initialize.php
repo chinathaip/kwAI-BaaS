@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 define('BASE_DIR', dirname(__FILE__) . "/..");
+$admin_end = strpos($_SERVER['SCRIPT_NAME'], '/admin') + 7;
+$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $admin_end);
+define("WWW_ROOT", $doc_root);
 
 require_once 'utils.php';
 require_once 'status.php';
