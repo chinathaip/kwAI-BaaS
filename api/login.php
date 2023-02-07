@@ -13,18 +13,13 @@ handle("POST", function (mysqli $db) {
     }
 
     $result = get_credentials($db, $username);
-    if (count($result) == 0) {
-        http_response_code(HTTP_NOT_FOUND);
-        exit();
-    }
-
-    if (password_verify($data['password'], $result['password'])) {
-        http_response_code(HTTP_OK);
-        echo json_encode($result);
-    } else {
+    if (count($result) == 0 || !password_verify($data['password'], $result['password'])) {
         http_response_code(HTTP_UNAUTHORIZED);
         exit();
     }
+
+    http_response_code(HTTP_OK);
+    echo json_encode($result);
 });
 
 
