@@ -35,9 +35,11 @@ $histories = get_all_history(connectDB(), $id);
                     <td><?php echo $history['name'] ?></td>
                     <td><?php echo $history['user_id'] ?></td>
                     <td><a class="action"
-                           href='<?php echo "chat.php/?uid=" . $history['user_id'] . "&hid=" . $history['id'] ?>'>View
+                           href='<?php echo "chat.php?uid=" . $history['user_id'] . "&hid=" . $history['id'] ?>'>View
                             Chat</a></td>
-                    <td><a class="action" href=''>Delete</a></td>
+                    <td><a class="action"
+                           href='<?php echo "history_delete_confirm.php?uid=" . $history['user_id'] . "&hid=" . $history['id'] ?>'>Delete</a>
+                    </td>
                 </tr>
             <?php } ?>
         </table>

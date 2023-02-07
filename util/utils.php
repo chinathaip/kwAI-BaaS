@@ -7,11 +7,13 @@ function url_for($script_path): string
     }
     return WWW_ROOT . $script_path;
 }
+
 function redirect_to(string $location): void
 {
     header("Location: " . $location);
     exit;
 }
+
 function connectDB(): mysqli
 {
     $conn = new mysqli("containers-us-west-187.railway.app", "root", "kuClq9pNEbhqXbFTP2CG", "railway", "6502");
@@ -61,4 +63,9 @@ function is_history_owner(mysqli $db, string $uid, string $hid): bool
         }
     }
     return false;
+}
+
+function is_post_request(): bool
+{
+    return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
