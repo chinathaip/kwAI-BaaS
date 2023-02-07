@@ -47,7 +47,7 @@ navigation ul li {
 }
 
 #content {
-    width: 920px;
+    width: 100%;
     min-height: 500px;
     padding: 0 30px;
 }
@@ -129,6 +129,6 @@ dd {
     padding-left: 1em;
 }
 
-li{
+li {
     font-size: large;
 }
