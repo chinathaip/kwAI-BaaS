@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__) . "/.." . "/util/initialize.php";
+require dirname(__FILE__) . "/../.." . "/util/initialize.php";
 include 'header.php';
 ?>
 

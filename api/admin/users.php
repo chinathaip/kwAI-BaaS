@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__) . "/.." . "/util/initialize.php";
+require dirname(__FILE__) . "/../.." . "/util/initialize.php";
 $page_title = "Manage Users";
 include 'header.php';
 require BASE_DIR . "/api/service/get_all_users.php";

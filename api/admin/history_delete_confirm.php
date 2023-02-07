@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__) . "/.." . "/util/initialize.php";
+require dirname(__FILE__) . "/../.." . "/util/initialize.php";
 include 'header.php';
 $page_title = "Delete Confirmation";
 require BASE_DIR . "/api/service/delete_history.php";
