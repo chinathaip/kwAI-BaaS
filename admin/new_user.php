@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-require dirname(__FILE__) . "/../.." . "/util/initialize.php";
+require dirname(__FILE__) . "/.." . "/util/initialize.php";
 require BASE_DIR . "/api/service/create_new_users.php";
 include 'header.php';
 

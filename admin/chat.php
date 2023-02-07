@@ -1,5 +1,5 @@
 <?php
-require dirname(__FILE__) . "/../.." . "/util/initialize.php";
+require dirname(__FILE__) . "/.." . "/util/initialize.php";
 $page_title = "View Chat";
 include 'header.php';
 require BASE_DIR . "/api/service/get_user_history_by_id.php";
