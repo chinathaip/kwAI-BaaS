@@ -1,9 +1,9 @@
 {
   "functions": {
-    "api/*.php": {
+    "admin/*.php": {
       "runtime": "vercel-php@0.5.2"
     },
-    "admin/*.php": {
+    "api/*.php": {
       "runtime": "vercel-php@0.5.2"
     }
   }
