@@ -69,3 +69,8 @@ function is_post_request(): bool
 {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
+
+function cleanInput(string $string = ""): string
+{
+    return htmlspecialchars($string);
+}

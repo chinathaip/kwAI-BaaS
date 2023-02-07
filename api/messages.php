@@ -7,8 +7,8 @@ require_once 'service/send_message.php';
 require_once 'service/get_user_history_by_id.php';
 
 handle("GET", function (mysqli $db) {
-    $userid = $_GET['userid'] ?? "";
-    $hid = $_GET['hid'] ?? "";
+    $userid = cleanInput($_GET['userid'] ?? "");
+    $hid = cleanInput($_GET['hid'] ?? "");
     if ($userid == "" || $hid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
@@ -30,10 +30,10 @@ handle("GET", function (mysqli $db) {
 handle("POST", function (mysqli $db) {
     //read request body & put into History object
     $data = json_decode(file_get_contents('php://input'), true);
-    $uid = $data['user_id'] ?? "";
-    $hid = $data['history_id'] ?? "";
-    $uq = $data['user_question'] ?? "";
-    $ai = $data['ai_response'] ?? "";
+    $uid = cleanInput($data['user_id'] ?? "");
+    $hid = cleanInput($data['history_id'] ?? "");
+    $uq = cleanInput($data['user_question'] ?? "");
+    $ai = cleanInput($data['ai_response'] ?? "");
     if ($uid == "" || $hid == "" || $uq == "" || $ai == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();

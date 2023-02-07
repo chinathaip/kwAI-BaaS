@@ -5,7 +5,7 @@ require 'service/verify_login.php';
 
 handle("POST", function (mysqli $db) {
     $data = json_decode(file_get_contents('php://input'), true);
-    $username = $data['username'] ?? "";
+    $username = cleanInput($data['username'] ?? "");
     $hashPw = password_hash($data['password'] ?? "", PASSWORD_DEFAULT);
     if ($username == "" || $hashPw == "") {
         http_response_code(HTTP_BAD_REQUEST);

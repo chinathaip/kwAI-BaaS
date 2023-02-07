@@ -7,7 +7,7 @@ require_once 'service/delete_history.php';
 require_once 'service/get_all_history.php';
 
 handle("GET", function (mysqli $db) {
-    $userid = $_GET['userid'] ?? "";
+    $userid = cleanInput($_GET['userid'] ?? "");
     if ($userid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
@@ -25,8 +25,8 @@ handle("GET", function (mysqli $db) {
 handle("POST", function (mysqli $db) {
     //read request body & put into History object
     $data = json_decode(file_get_contents('php://input'), true);
-    $uid = $data['user_id'] ?? "";
-    $hid = $data['history_name'] ?? "New Chat";
+    $uid = cleanInput($data['user_id'] ?? "");
+    $hid = cleanInput($data['history_name'] ?? "New Chat");
     if ($uid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
@@ -40,8 +40,8 @@ handle("POST", function (mysqli $db) {
 
 handle("DELETE", function (mysqli $db) {
     $data = json_decode(file_get_contents('php://input'), true);
-    $userid = $data['user_id'] ?? "";
-    $hid = $data['history_id'] ?? "";
+    $userid = cleanInput($data['user_id'] ?? "");
+    $hid = cleanInput($data['history_id'] ?? "");
     if ($userid == "" || $hid == "") {
         http_response_code(HTTP_BAD_REQUEST);
         exit();
