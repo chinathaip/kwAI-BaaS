@@ -30,8 +30,8 @@ $users = get_all_users(connectDB());
                     <td><?php echo $user->id ?></td>
                     <td><?php echo $user->username ?></td>
                     <td><?php echo $user->password ?></td>
-                    <td><a class="action" href='<?php echo "history.php?id=" . $user->id?>'>View History</a></td>
-                    <td><a class="action" href=''>Delete</a></td>
+                    <td><a class="action" href='<?php echo "history.php?id=" . $user->id ?>'>View History</a></td>
+                    <td><a class="action" href='<?php echo "user_delete_confirm.php?id=" . $user->id ?>'>Delete</a></td>
                 </tr>
             <?php } ?>
         </table>

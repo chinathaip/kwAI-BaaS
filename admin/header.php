@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
     <?php
     $page_title = $page_title ?? 'Admin Panel';
     echo "<title>" . $page_title . "</title>"; ?>
-    <link rel="stylesheet" href=<?php echo url_for('/stylesheets/main.css'); ?>>
+    <link rel="stylesheet" href=<?php echo url_for('/stylesheets/main.css?v=3'); ?>>
 </head>
 
 <body>

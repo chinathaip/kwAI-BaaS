@@ -47,7 +47,8 @@ navigation ul li {
 }
 
 #content {
-    width: 100%;
+    width: 50%;
+    margin: auto;
     min-height: 500px;
     padding: 0 30px;
 }
@@ -77,10 +78,13 @@ table {
 
 table.list {
     width: 100%;
+    padding: 5px;
+    margin: auto;
 }
 
 table.list tr td {
     border: 1px solid #999999;
+    padding: 5px;
 }
 
 table.list tr th {
