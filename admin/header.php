@@ -8,15 +8,15 @@ ini_set('display_errors', 1);
     <?php
     $page_title = $page_title ?? 'Admin Panel';
     echo "<title>" . $page_title . "</title>"; ?>
-    <link rel="stylesheet" href=<?php echo url_for('/stylesheets/main.css?v=3'); ?>>
+    <link rel="stylesheet" href=<?php echo url_for('/stylesheets/main.css?v=1'); ?>>
 </head>
 
 <body>
 <header>
-    <h1>Chat KwAI Admin Panel</h1>
+    <h1><a href="index.php"> &#x1F47E;	Chat KwAI Admin Panel &#x1F47E;	</a></h1>
 </header>
-<nav>
+<nav id="back">
     <ul>
-        <li><a href="index.php">Back to Main Menu</a></li>
+        <li><a href="index.php">&lArr; Back to Main Menu</a></li>
     </ul>
 </nav>

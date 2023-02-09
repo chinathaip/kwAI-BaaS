@@ -13,7 +13,7 @@ $users = get_all_users(connectDB());
     <div class="pages listing">
         <h1>Manage Users</h1>
         <div class="actions">
-            <a class="action" href="new_user.php">Create New User</a>
+            <a href="new_user.php">Create New User</a>
         </div>
 
         <table class="list">
