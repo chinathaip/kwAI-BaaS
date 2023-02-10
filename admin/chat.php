@@ -12,9 +12,11 @@ if ($uid == '' || $hid == '') {
 
 $messages = get_user_history_by_id(connectDB(), $uid, $hid);
 ?>
-<link rel="stylesheet" href=<?php echo url_for('/stylesheets/chat.css'); ?>>
-<a href="<?php echo url_for("/history.php?id=" . $uid) ?>">Back to History</a>
-<h1>Messages: </h1>
+<link rel="stylesheet" href=<?php echo url_for('/stylesheets/chat.css?v=1'); ?>>
+<div class="head">
+    <a href="<?php echo url_for("/history.php?id=" . $uid) ?>">&lArr; Back to History</a>
+    <h1>Messages: </h1>
+</div>
 <div class="chat-container">
     <?php foreach ($messages as $message): ?>
         <div class="chat-question">
